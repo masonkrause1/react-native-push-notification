@@ -36,7 +36,7 @@ class RNPushNotificationConfig {
             Log.w(RNPushNotification.LOG_TAG, "Unable to find " + KEY_CHANNEL_NAME + " in manifest. Falling back to default");
         }
         // Default
-        return "rn-push-notification-channel";
+        return "MediMan Notification Channel";
     }
     public String getChannelDescription() {
         try {

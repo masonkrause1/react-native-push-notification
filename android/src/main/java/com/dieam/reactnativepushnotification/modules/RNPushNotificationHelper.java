@@ -40,7 +40,7 @@ public class RNPushNotificationHelper {
     private static final String NOTIFICATION_CHANNEL_ID = "rn-push-notification-channel-id";
     private static String NOTIFICATION_CHANNEL_ID_TMP = null;
     
-    private static final CharSequence NOTIFICATION_CHANNEL_NAME = "rn-push-notification-channel";
+    private static final CharSequence NOTIFICATION_CHANNEL_NAME = "MediMan Notification Channel";
     private static CharSequence NOTIFICATION_CHANNEL_NAME_TMP = null;
 
     private Context context;
