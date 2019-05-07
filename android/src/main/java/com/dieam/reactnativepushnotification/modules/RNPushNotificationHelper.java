@@ -418,6 +418,8 @@ public class RNPushNotificationHelper {
                     // Add "action" for later identifying which button gets pressed.
                     bundle.putString("action", id);
                     actionIntent.putExtra("notification", bundle);
+                    actionIntent.putExtra("id", id);
+                    actionIntent.setClass(context, RNPushNotificationActionHandlerReceiver.class);
                     PendingIntent pendingActionIntent = PendingIntent.getBroadcast(context, notificationID, actionIntent,
                                 PendingIntent.FLAG_UPDATE_CURRENT);
                     notification.addAction(icon, text, pendingActionIntent);

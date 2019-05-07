@@ -16,9 +16,17 @@ import java.util.List;
 
    @Override
   public void onReceive(Context context, Intent intent) {
-    if (intent == null || intent.getExtras() == null || isAppOnForeground((context))) {
+    if (intent == null || intent.getExtras() == null) {
       return;
     }
+
+    Intent i = new Intent();
+    Bundle notif = (Bundle) intent.getExtras().get("notification");
+    String id = (String) intent.getExtras().get("id");
+    i.putExtra("notification", notif);
+    i.putExtra("id", id);
+    i.setAction("com.fable.mediman" + "." + id);
+    context.sendBroadcast(i);
 
     Intent serviceIntent = new Intent(context, RNPushNotificationActionService.class);
     serviceIntent.putExtras(intent.getExtras());
@@ -34,26 +42,26 @@ import java.util.List;
     HeadlessJsTaskService.acquireWakeLockNow(context);
     
   }
-
-   private boolean isAppOnForeground(Context context) {
-    /**
-     We need to check if app is in foreground otherwise the app will crash.
-     http://stackoverflow.com/questions/8489993/check-android-application-is-in-foreground-or-not
-     **/
-    ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-    List<ActivityManager.RunningAppProcessInfo> appProcesses =
-        activityManager.getRunningAppProcesses();
-    if (appProcesses == null) {
-      return false;
-    }
-    final String packageName = context.getPackageName();
-    for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
-      if (appProcess.importance ==
-          ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND &&
-          appProcess.processName.equals(packageName)) {
-        return true;
-      }
-    }
-    return false;
-  }
-}
+ }
+//    private boolean isAppOnForeground(Context context) {
+//     /**
+//      We need to check if app is in foreground otherwise the app will crash.
+//      http://stackoverflow.com/questions/8489993/check-android-application-is-in-foreground-or-not
+//      **/
+//     ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+//     List<ActivityManager.RunningAppProcessInfo> appProcesses =
+//         activityManager.getRunningAppProcesses();
+//     if (appProcesses == null) {
+//       return false;
+//     }
+//     final String packageName = context.getPackageName();
+//     for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
+//       if (appProcess.importance ==
+//           ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND &&
+//           appProcess.processName.equals(packageName)) {
+//         return true;
+//       }
+//     }
+//     return false;
+//   }
+// }
