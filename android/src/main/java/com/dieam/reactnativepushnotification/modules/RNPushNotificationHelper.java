@@ -658,14 +658,8 @@ public class RNPushNotificationHelper {
             } else {
                 channel.setSound(null, null);
             }
-
-        NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, this.config.getChannelName() != null ? this.config.getChannelName() : "rn-push-notification-channel", importance);
-
-        channel.setDescription(this.config.getChannelDescription());
-        channel.enableLights(true);
-        channel.enableVibration(true);
-
-        manager.createNotificationChannel(channel);
-        channelCreated = true;
+            manager.createNotificationChannel(channel);
+        }
+        return;
     }
 }
