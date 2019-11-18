@@ -22,6 +22,7 @@ import android.os.Build;
 import android.os.Bundle;
 import androidx.core.app.NotificationCompat;
 import android.util.Log;
+import java.util.List;
 
 import com.facebook.react.bridge.ReadableMap;
 
