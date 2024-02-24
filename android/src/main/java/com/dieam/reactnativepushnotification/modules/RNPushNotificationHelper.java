@@ -143,8 +143,8 @@ public class RNPushNotificationHelper {
             val alarmManager = ContextCompat.getSystemService(context, AlarmManager::class.java);
             if (alarmManager?.canScheduleExactAlarms() == false) {
                 Intent().also { intent ->
-                    intent.action = Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM
-                    context.startActivity(intent)
+                    intent.action = Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM;
+                    context.startActivity(intent);
                 }
             } else {
                 getAlarmManager().setExact(AlarmManager.RTC_WAKEUP, fireDate, pendingIntent);
