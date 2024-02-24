@@ -140,7 +140,7 @@ public class RNPushNotificationHelper {
                 bundle.getString("id"), Long.toString(fireDate)));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            val alarmManager = ContextCompat.getSystemService(context, AlarmManager::class.java)
+            val alarmManager = ContextCompat.getSystemService(context, AlarmManager::class.java);
             if (alarmManager?.canScheduleExactAlarms() == false) {
                 Intent().also { intent ->
                     intent.action = Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM
