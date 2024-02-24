@@ -142,10 +142,7 @@ public class RNPushNotificationHelper {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             val alarmManager = context.getSystemService(Context.ALARM_SERVICE);
             if (alarmManager.canScheduleExactAlarms() == false) {
-                Intent().also { intent ->
-                    intent.action = Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM;
-                    context.startActivity(intent);
-                }
+                startActivity(Intent(ACTION_REQUEST_SCHEDULE_EXACT_ALARM))
             } else {
                 getAlarmManager().setExact(AlarmManager.RTC_WAKEUP, fireDate, pendingIntent);
             }
