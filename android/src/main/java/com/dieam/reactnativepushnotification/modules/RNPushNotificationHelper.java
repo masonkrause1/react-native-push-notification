@@ -141,7 +141,7 @@ public class RNPushNotificationHelper {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             if (getAlarmManager().canScheduleExactAlarms() == false) {
-                startActivity(Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM));
+                startActivity(Intent(ACTION_REQUEST_SCHEDULE_EXACT_ALARM));
             } else {
                 getAlarmManager().setExact(AlarmManager.RTC_WAKEUP, fireDate, pendingIntent);
             }
