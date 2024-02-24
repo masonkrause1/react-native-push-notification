@@ -138,11 +138,25 @@ public class RNPushNotificationHelper {
 
         Log.d(LOG_TAG, String.format("Setting a notification with id %s at time %s",
                 bundle.getString("id"), Long.toString(fireDate)));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            getAlarmManager().setExact(AlarmManager.RTC_WAKEUP, fireDate, pendingIntent);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            val alarmManager = ContextCompat.getSystemService(context, AlarmManager::class.java)
+            if (alarmManager?.canScheduleExactAlarms() == false) {
+                Intent().also { intent ->
+                    intent.action = Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM
+                    context.startActivity(intent)
+                }
+            } else {
+                getAlarmManager().setExact(AlarmManager.RTC_WAKEUP, fireDate, pendingIntent);
+            }
         } else {
-            getAlarmManager().set(AlarmManager.RTC_WAKEUP, fireDate, pendingIntent);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                getAlarmManager().setExact(AlarmManager.RTC_WAKEUP, fireDate, pendingIntent);
+            } else {
+                getAlarmManager().set(AlarmManager.RTC_WAKEUP, fireDate, pendingIntent);
+            }
         }
+        
     }
 
     public void sendToNotificationCentre(Bundle bundle) {
